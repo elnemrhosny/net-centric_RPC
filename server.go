@@ -69,9 +69,9 @@ func (s *Server) acceptLoop() {
 			conn.Close()
 			return
 		}
-		// s.wg.Add(1) //dont forget to defer this inside s.handle
+		s.wg.Add(1)
 		s.mu.Unlock()
-		// go s.handle()
+		go s.handle(conn)
 	}
 }
 
