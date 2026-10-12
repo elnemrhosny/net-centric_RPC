@@ -200,3 +200,10 @@ func TestClientTimeout(t *testing.T) {
 		t.Fatal("expected timeout, got nil")
 	}
 }
+func TestValidateRequestLimits(t *testing.T) {
+	big := json.RawMessage(strings.Repeat("a", maxArgumentBytes+1))
+	err := validateRequest(Request{Method: "Echo", Args: []json.RawMessage{big}})
+	if err == nil || !strings.Contains(err.Error(), "exceeds maximum size") {
+		t.Fatalf("got %v, want 'exceeds maximum size'", err)
+	}
+}

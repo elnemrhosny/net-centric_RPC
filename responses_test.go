@@ -176,15 +176,7 @@ func TestAllResponses(t *testing.T) {
 			name:     "Malformed JSON",
 			raw:      `{not json`,
 			wantOK:   false,
-			wantErrs: "malformed",
-		},
-
-		// ---- oversized input ----
-		{
-			name:     "Oversized single arg",
-			raw:      `{"method":"Echo","args":["` + string(make([]byte, 100_000)) + `"]}`,
-			wantOK:   false,
-			wantErrs: "Oversized argument",
+			wantErrs: "bad request",
 		},
 	}
 

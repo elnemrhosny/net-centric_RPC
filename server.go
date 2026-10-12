@@ -9,9 +9,9 @@ import (
 type Server struct {
 	mu       sync.Mutex //locking goroutines to prevent race conditions
 	listener net.Listener
-	// service  *Service
-	running bool           //lets start reject a second call while server is already running
-	wg      sync.WaitGroup //tracks the accept goroutine and all active connection handlers , Stop will call wg.wait to wait for them to finish
+	service  *Service
+	running  bool           //lets start reject a second call while server is already running
+	wg       sync.WaitGroup //tracks the accept goroutine and all active connection handlers , Stop will call wg.wait to wait for them to finish
 }
 
 func (s *Server) Start(addr string) error {
