@@ -1,6 +1,9 @@
 package rpc
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 type Service struct{}
 
@@ -18,4 +21,14 @@ func (s *Service) Ping(id int) (string, error) {
 		return "", fmt.Errorf("invalid id %d", id)
 	}
 	return fmt.Sprintf("pong %d", id), nil
+}
+
+// for tests
+func (s *Service) Slow() string {
+	time.Sleep(300 * time.Millisecond)
+	return "ok"
+}
+
+func (s *Service) Panic() string {
+	panic("boom")
 }
