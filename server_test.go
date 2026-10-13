@@ -79,6 +79,7 @@ func TestServerAcceptsTCP(t *testing.T) {
 	}
 	conn.Close()
 }
+
 func TestMalformedJSON(t *testing.T) {
 	srv := &Server{service: &Service{}}
 	if err := srv.Start("127.0.0.1:0"); err != nil {
@@ -103,6 +104,7 @@ func TestMalformedJSON(t *testing.T) {
 		t.Fatal("malformed JSON returned ok=true, want error")
 	}
 }
+
 func TestOversizedArgs(t *testing.T) {
 	srv := &Server{service: &Service{}}
 	if err := srv.Start("127.0.0.1:0"); err != nil {
